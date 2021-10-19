@@ -57,9 +57,21 @@ namespace Previsualisation_PEA
                 ListViewItem item = new ListViewItem(annee.ToString());
                 item.SubItems.Add(String.Format("{0:0.00}", pea) + '€');
                 item.SubItems.Add(rand.ToString() + '%');
-                item.SubItems.Add(String.Format("{0:0.00}", profitAnnee) + '€');
+                item.SubItems.Add(String.Format("{0:0.00}", profitAnnee - (float)ajoutMensuelNumericUpDown.Value * 12f) + '€');
                 Tableau.ltv.Items.Add(item);
 
+            }
+
+            string[] tabTmp = new string[Tableau.ltv.Items.Count + 1];
+            for (int i = 0; i < Tableau.ltv.Items.Count; i++)
+            {
+                if (Tableau.ltv.Items.Count - 1 == i)
+                {
+                    Tableau.ltv.Items[i].SubItems[3].Text = "";
+                    break;
+                }
+                tabTmp[i] = Tableau.ltv.Items[i+1].SubItems[3].Text;
+                Tableau.ltv.Items[i].SubItems[3].Text = tabTmp[i];
             }
 
             for (int i = 0; i < Tableau.ltv.Columns.Count; i++)

@@ -81,6 +81,7 @@ namespace Previsualisation_PEA
             this.Controls.Add(this.listView1);
             this.Name = "Tableau";
             this.Size = new System.Drawing.Size(587, 558);
+            this.Load += new System.EventHandler(this.Tableau_Load);
             this.ResumeLayout(false);
 
         }

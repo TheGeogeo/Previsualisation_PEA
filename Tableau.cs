@@ -25,5 +25,22 @@ namespace Previsualisation_PEA
         {
 
         }
+
+        private void Tableau_Load(object sender, EventArgs e)
+        {
+            /*
+             * Année
+             * cumul ajout année
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             * 
+             */
+        }
     }
 }
