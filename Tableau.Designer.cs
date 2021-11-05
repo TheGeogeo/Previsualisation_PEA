@@ -34,6 +34,7 @@ namespace Previsualisation_PEA
             this.pea = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pourcentageAnnee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.profitAnnee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listView1
@@ -42,7 +43,8 @@ namespace Previsualisation_PEA
             this.annee,
             this.pea,
             this.pourcentageAnnee,
-            this.profitAnnee});
+            this.profitAnnee,
+            this.columnHeader1});
             this.listView1.GridLines = true;
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(23, 3);
@@ -56,23 +58,28 @@ namespace Previsualisation_PEA
             // annee
             // 
             this.annee.Text = "Année";
-            this.annee.Width = 75;
+            this.annee.Width = 61;
             // 
             // pea
             // 
             this.pea.Text = "PEA";
-            this.pea.Width = 175;
+            this.pea.Width = 66;
             // 
             // pourcentageAnnee
             // 
             this.pourcentageAnnee.Text = "% année";
             this.pourcentageAnnee.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.pourcentageAnnee.Width = 80;
+            this.pourcentageAnnee.Width = 64;
             // 
             // profitAnnee
             // 
             this.profitAnnee.Text = "Profit année";
-            this.profitAnnee.Width = 165;
+            this.profitAnnee.Width = 93;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Ajout mensuel";
+            this.columnHeader1.Width = 91;
             // 
             // Tableau
             // 
@@ -92,5 +99,6 @@ namespace Previsualisation_PEA
         private System.Windows.Forms.ColumnHeader pourcentageAnnee;
         private System.Windows.Forms.ColumnHeader profitAnnee;
         public System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

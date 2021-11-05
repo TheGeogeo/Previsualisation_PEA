@@ -13,6 +13,7 @@ namespace Previsualisation_PEA
     public partial class Config : UserControl
     {
         public static Config instance;
+
         public Config()
         {
             InitializeComponent();
@@ -27,9 +28,8 @@ namespace Previsualisation_PEA
             DateTime now = DateTime.Now;
             Random random = new Random();
             int rand;
-            float rendAnneeMoyen, profitAnnee, anneePrecedente;
+            float rendAnneeMoyen, profitAnnee, anneePrecedente, ajoutMensuel;
             float pea = (float)montantInitNumericUpDown.Value;
-
 
             for (int annee = now.Year; annee < now.Year + anneeTrackBar.Value; annee++)
             {
@@ -39,46 +39,31 @@ namespace Previsualisation_PEA
 
                 if (annee == now.Year && !premiereAnneeCheckBox.Checked)
                 {
+                    ajoutMensuel = 6f * (float)ajoutMensuelNumericUpDown.Value;
                     rand /= 2;
                     rendAnneeMoyen = (rand / 100f) + 1f;// on considere qu'on a commencé en cour d'année
-                    anneePrecedente = (float)montantInitNumericUpDown.Value;
+                    anneePrecedente = (float)montantInitNumericUpDown.Value + ajoutMensuel;
+                    pea += ajoutMensuel;
                 }
                 else
                 {
+                    ajoutMensuel = (float)ajoutMensuelNumericUpDown.Value * 12f;
                     anneePrecedente = pea;
-                    pea += (float)ajoutMensuelNumericUpDown.Value * 12f;
+                    pea += ajoutMensuel;
                     rendAnneeMoyen = (rand / 100f) + 1f;
                 }
 
                 pea *= rendAnneeMoyen;
                 profitAnnee = pea - anneePrecedente;
 
-
                 ListViewItem item = new ListViewItem(annee.ToString());
                 item.SubItems.Add(String.Format("{0:0.00}", pea) + '€');
                 item.SubItems.Add(rand.ToString() + '%');
-                item.SubItems.Add(String.Format("{0:0.00}", profitAnnee - (float)ajoutMensuelNumericUpDown.Value * 12f) + '€');
+                item.SubItems.Add(annee == now.Year ? String.Format("{0:0.00}", profitAnnee) + '€' : String.Format("{0:0.00}", profitAnnee - ajoutMensuel) + '€');
+                item.SubItems.Add(String.Format("{0:0.00}", ajoutMensuel) + '€');
                 Tableau.ltv.Items.Add(item);
-
             }
 
-            string[] tabTmp = new string[Tableau.ltv.Items.Count + 1];
-            for (int i = 0; i < Tableau.ltv.Items.Count; i++)
-            {
-                if (Tableau.ltv.Items.Count - 1 == i)
-                {
-                    Tableau.ltv.Items[i].SubItems[3].Text = "";
-                    break;
-                }
-                tabTmp[i] = Tableau.ltv.Items[i+1].SubItems[3].Text;
-                Tableau.ltv.Items[i].SubItems[3].Text = tabTmp[i];
-            }
-
-            for (int i = 0; i < Tableau.ltv.Columns.Count; i++)
-            {
-                //Tableau.ltv.Columns[i].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-                Tableau.ltv.Columns[i].TextAlign = HorizontalAlignment.Center;
-            }
             calculButton.Enabled = true;
         }
 
@@ -94,12 +79,10 @@ namespace Previsualisation_PEA
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
